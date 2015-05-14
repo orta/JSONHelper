@@ -50,7 +50,7 @@ class JSONHelperTests: XCTestCase {
 
     init() {}
   }
-    
+
   enum EnumTest: Int {
     case Zero = 0
     case One = 1
@@ -118,7 +118,7 @@ class JSONHelperTests: XCTestCase {
 
   func testOptionalNSDate() {
     var property: NSDate?
-    property <-- (dummyResponse["date"], "yyyy-MM-dd")
+    property <-- (dummyResponse["date"], DateFormatConverter("yyyy-MM-dd"))
     let dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
     let testDate = dateFormatter.dateFromString("2014-09-19")
@@ -132,9 +132,9 @@ class JSONHelperTests: XCTestCase {
     dateFormatter.dateFormat = "yyyy-MM-dd"
     let defaultTestDate = dateFormatter.dateFromString("2015-09-19")
     var property = defaultTestDate!
-    property <-- (dummyResponse["invalidKey"], "yyyy-MM-dd")
+    property <-- (dummyResponse["invalidKey"], DateFormatConverter("yyyy-MM-dd"))
     XCTAssertEqual(property.compare(defaultTestDate!), NSComparisonResult.OrderedSame, "NSDate should have the default value 2015-09-19")
-    property <-- (dummyResponse["date"], "yyyy-MM-dd")
+    property <-- (dummyResponse["date"], DateFormatConverter("yyyy-MM-dd"))
     let testDate = dateFormatter.dateFromString("2014-09-19")
     XCTAssertEqual(property.compare(testDate!), NSComparisonResult.OrderedSame, "NSDate should have the value 2015-09-19")
   }
@@ -184,25 +184,26 @@ class JSONHelperTests: XCTestCase {
     property <-- dummyResponse["instanceArray"]
     XCTAssertEqual(property.count, 2, "[Person] property should have 2 members")
   }
-  
+
   func testInstanceMap() {
     var property = [String:Person]()
     property <-- dummyResponse["instanceMap"]
     XCTAssertEqual(property["ePerson"]!.name, "e", "member \"ePerson\" of [String:Person] property should have \"e\" for name")
   }
-  
+
   func testRawValueEnum() {
     var property = EnumTest.Zero
     property <-- dummyResponse["int"]
     XCTAssertEqual(property, EnumTest.One, "EnumTest should be equal to .One")
   }
-  
+
   func testJSONStringArrayParsing() {
     var jsonString = "[{\"name\": \"I am \"},{\"name\": \"Groot!\"}]"
+    var jsonObject: JSONObject? = JSONStringToJSONObject(jsonString)
     var people = [Person]()
     var areYouGroot = ""
     
-    people <-- jsonString
+    people <-- jsonObject
     
     for person in people {
       areYouGroot += person.name
@@ -213,11 +214,12 @@ class JSONHelperTests: XCTestCase {
   
   func testJSONStringMapParsing() {
     var jsonString = "{\"person one\": {\"name\": \"I am \"}, \"person two\": {\"name\": \"Groot!\"}}"
+    var jsonObject: JSONObject? = JSONStringToJSONObject(jsonString)
     var people = [String:Person]()
     var areYouGroot = ""
     var keys = ""
     
-    people <-- jsonString
+    people <-- jsonObject
     
     for (personKey, person) in people {
       areYouGroot += person.name
@@ -227,4 +229,27 @@ class JSONHelperTests: XCTestCase {
     XCTAssertEqual(keys, "person oneperson two", "keys should be correctly picked up")
     XCTAssertEqual(areYouGroot, "I am Groot!", "Groot should be Groot")
   }
+
+  func testJSONIntObjectMap() {
+    var jsonString = "{\"1\": {\"name\": \"Grace\"}, \"2\": {\"name\": \"Lancy\"}}"
+    var jsonObject: JSONObject? = JSONStringToJSONObject(jsonString)
+    var people = [Int: Person]()
+
+    people <-- jsonObject
+
+    XCTAssertEqual(people[1]!.name, "Grace", "people[1] should be Grace")
+    XCTAssertEqual(people[2]!.name, "Lancy", "people[2] should be Lancy")
+  }
+
+  func testJSONIntIntMap() {
+    var jsonString = "{\"1\": 1, \"2\": 2}"
+    var jsonObject: JSONObject? = JSONStringToJSONObject(jsonString)
+    var dict = [Int: Int]()
+
+    dict <-- jsonObject
+
+    XCTAssertEqual(dict[1]!, 1, "dict[1] should be 1")
+    XCTAssertEqual(dict[2]!, 2, "dict[2] should be 2")
+  }
+
 }

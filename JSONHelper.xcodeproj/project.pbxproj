@@ -24,6 +24,8 @@
 		5FC1A4901B1D082500EF50C4 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A48F1B1D082500EF50C4 /* NSDate.swift */; };
 		5FC1A4911B1D082B00EF50C4 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A48D1B1D057B00EF50C4 /* Bool.swift */; };
 		5FC1A4921B1D082D00EF50C4 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A48F1B1D082500EF50C4 /* NSDate.swift */; };
+		5FC1A4941B1D1D8B00EF50C4 /* NSURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A4931B1D1D8B00EF50C4 /* NSURL.swift */; };
+		5FC1A4951B1D1D8B00EF50C4 /* NSURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A4931B1D1D8B00EF50C4 /* NSURL.swift */; };
 		5FE42BDA1B12DB3E00EF50C4 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE42BD91B12DB3E00EF50C4 /* JSONHelper.swift */; };
 		5FE42BDB1B12DB3E00EF50C4 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE42BD91B12DB3E00EF50C4 /* JSONHelper.swift */; };
 		D76C52051ACD46B100B49735 /* JSONHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FAD07691A70F2FC00C4D09E /* JSONHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -75,6 +77,7 @@
 		5FC1A4881B1D024500EF50C4 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Int.swift; path = Extensions/Int.swift; sourceTree = "<group>"; };
 		5FC1A48D1B1D057B00EF50C4 /* Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bool.swift; path = Extensions/Bool.swift; sourceTree = "<group>"; };
 		5FC1A48F1B1D082500EF50C4 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDate.swift; path = Extensions/NSDate.swift; sourceTree = "<group>"; };
+		5FC1A4931B1D1D8B00EF50C4 /* NSURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSURL.swift; path = Extensions/NSURL.swift; sourceTree = "<group>"; };
 		5FE42BD91B12DB3E00EF50C4 /* JSONHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
 		D76C520A1ACD46B100B49735 /* JSONHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -241,6 +244,7 @@
 				5FC1A4881B1D024500EF50C4 /* Int.swift */,
 				5FC1A48D1B1D057B00EF50C4 /* Bool.swift */,
 				5FC1A48F1B1D082500EF50C4 /* NSDate.swift */,
+				5FC1A4931B1D1D8B00EF50C4 /* NSURL.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -456,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FC1A4941B1D1D8B00EF50C4 /* NSURL.swift in Sources */,
 				5FC1A4891B1D024500EF50C4 /* Int.swift in Sources */,
 				5FC1A48E1B1D057B00EF50C4 /* Bool.swift in Sources */,
 				5FC1A4871B1CFFB500EF50C4 /* String.swift in Sources */,
@@ -493,6 +498,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FC1A4951B1D1D8B00EF50C4 /* NSURL.swift in Sources */,
 				5FC1A48C1B1D036700EF50C4 /* Int.swift in Sources */,
 				5FC1A4911B1D082B00EF50C4 /* Bool.swift in Sources */,
 				5FC1A48B1B1D036400EF50C4 /* String.swift in Sources */,

@@ -139,22 +139,22 @@ class JSONHelperTests: XCTestCase {
     XCTAssertEqual(property.compare(testDate), .OrderedSame, "NSDate should have the value 2015-09-19")
   }
 
-//  func testOptionalNSURL() {
-//    var property: NSURL?
-//    property <-- dummyResponse["url"]
-//    XCTAssertEqual(property!.host!, "github.com", "NSURL? property should equal github.com")
-//    property <-- dummyResponse["invalidKey"]
-//    XCTAssertNil(property, "NSURL? property should equal nil after invalid assignment")
-//  }
-//
-//  func testNSURL() {
-//    var property = NSURL(string: "http://google.com")!
-//    property <-- dummyResponse["invalidKey"]
-//    XCTAssertEqual(property.host!, "google.com", "NSURL should have the default value google.com")
-//    property <-- dummyResponse["url"]
-//    XCTAssertEqual(property.host!, "github.com", "NSURL should have the value github.com")
-//  }
-//
+  func testOptionalNSURL() {
+    var property: NSURL?
+    property <-- dummyResponse["url"]
+    XCTAssertEqual(property!.host!, "github.com", "NSURL? property should equal github.com")
+    property <-- dummyResponse["invalidKey"]
+    XCTAssertNil(property, "NSURL? property should equal nil after invalid assignment")
+  }
+
+  func testNSURL() {
+    var property = NSURL(string: "http://google.com")!
+    property <-- dummyResponse["invalidKey"]
+    XCTAssertEqual(property.host!, "google.com", "NSURL should have the default value google.com")
+    property <-- dummyResponse["url"]
+    XCTAssertEqual(property.host!, "github.com", "NSURL should have the value github.com")
+  }
+
 //  func testStringArray() {
 //    var property = [String]()
 //    property <-- dummyResponse["stringArray"]

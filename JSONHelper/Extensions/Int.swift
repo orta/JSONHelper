@@ -32,8 +32,8 @@ import Foundation
 
 extension Int: Convertible {
 
-  public static func convertFromValue(value: AnyObject?) -> Int? {
-    if let value: AnyObject = value {
+  public static func convertFromValue(value: Any?) -> Int? {
+    if let value: Any = value {
       if let intValue = value as? Int {
         return intValue
       } else if let stringValue = value as? String {

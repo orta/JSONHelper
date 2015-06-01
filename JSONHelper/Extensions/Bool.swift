@@ -32,8 +32,8 @@ import Foundation
 
 extension Bool: Convertible {
 
-  public static func convertFromValue(value: AnyObject?) -> Bool? {
-    if let value: AnyObject = value {
+  public static func convertFromValue(value: Any?) -> Bool? {
+    if let value: Any = value {
       if let boolValue = value as? Bool {
         return boolValue
       } else if let intValue = value as? Int {

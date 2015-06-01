@@ -21,6 +21,7 @@
 		5FC1A48B1B1D036400EF50C4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A4861B1CFFB500EF50C4 /* String.swift */; };
 		5FC1A48C1B1D036700EF50C4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A4881B1D024500EF50C4 /* Int.swift */; };
 		5FC1A48E1B1D057B00EF50C4 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A48D1B1D057B00EF50C4 /* Bool.swift */; };
+		5FC1A4911B1D082B00EF50C4 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A48D1B1D057B00EF50C4 /* Bool.swift */; };
 		5FE42BDA1B12DB3E00EF50C4 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE42BD91B12DB3E00EF50C4 /* JSONHelper.swift */; };
 		5FE42BDB1B12DB3E00EF50C4 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE42BD91B12DB3E00EF50C4 /* JSONHelper.swift */; };
 		D76C52051ACD46B100B49735 /* JSONHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FAD07691A70F2FC00C4D09E /* JSONHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -488,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FC1A48C1B1D036700EF50C4 /* Int.swift in Sources */,
+				5FC1A4911B1D082B00EF50C4 /* Bool.swift in Sources */,
 				5FC1A48B1B1D036400EF50C4 /* String.swift in Sources */,
 				5FE42BDB1B12DB3E00EF50C4 /* JSONHelper.swift in Sources */,
 			);

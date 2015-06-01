@@ -36,7 +36,9 @@ public typealias JSONDictionary = [String: AnyObject]
 
 /// TODOC
 public protocol Convertible {
-  static func convertFromValue(value: AnyObject?) -> Self?
+
+  /// TODOC
+  static func convertFromValue(value: Any?) -> Self?
 }
 
 /// Returns nil if given object is of type NSNull.
@@ -44,11 +46,11 @@ public protocol Convertible {
 /// :param: object Object to convert.
 ///
 /// :returns: nil if object is of type NSNull, else returns the object itself.
-public func convertToNilIfNull(object: AnyObject?) -> AnyObject? {
-  if object is NSNull {
+public func convertToNilIfNull(value: Any?) -> Any? {
+  if value is NSNull {
     return nil
   }
-  return object
+  return value
 }
 
 /// TODOC
@@ -56,31 +58,20 @@ public protocol Deserializable {
   init(jsonDictionary: JSONDictionary)
 }
 
-private func deserialize<T: Deserializable>(value: AnyObject?) -> T? {
-  if let jsonDictionary = convertToNilIfNull(value) as? JSONDictionary {
-    return T(jsonDictionary: jsonDictionary)
-  }
-  return nil
-}
-
 /// TODOC
 public protocol Serializable {
   func toJSONDictionary() -> JSONDictionary
 }
 
-private func serialize<T: Serializable>(serializable: T?) -> JSONDictionary? {
-  return serializable?.toJSONDictionary()
-}
-
 /// Operator for use in right hand side to left hand side conversion and deserialization.
 infix operator <-- { associativity right precedence 150 }
 
-public func <-- <C: Convertible>(inout lhs: C?, rhs: AnyObject?) -> C? {
+public func <-- <C: Convertible>(inout lhs: C?, rhs: Any?) -> C? {
   lhs = C.convertFromValue(convertToNilIfNull(rhs))
   return lhs
 }
 
-public func <-- <C: Convertible>(inout lhs: C, rhs: AnyObject?) -> C {
+public func <-- <C: Convertible>(inout lhs: C, rhs: Any?) -> C {
   var newValue: C?
   newValue <-- rhs
   if let newValue = newValue {
@@ -89,12 +80,16 @@ public func <-- <C: Convertible>(inout lhs: C, rhs: AnyObject?) -> C {
   return lhs
 }
 
-public func <-- <D: Deserializable>(inout lhs: D?, rhs: AnyObject?) -> D? {
-  lhs = deserialize(rhs)
+public func <-- <D: Deserializable>(inout lhs: D?, rhs: Any?) -> D? {
+  if let jsonDictionary = convertToNilIfNull(rhs) as? JSONDictionary {
+    lhs = D(jsonDictionary: jsonDictionary)
+  } else {
+    lhs = nil
+  }
   return lhs
 }
 
-public func <-- <D: Deserializable>(inout lhs: D, rhs: AnyObject?) -> D {
+public func <-- <D: Deserializable>(inout lhs: D, rhs: Any?) -> D {
   var newValue: D?
   newValue <-- rhs
   if let newValue = newValue {
@@ -114,4 +109,4 @@ public func --> <C: Convertible>(lhs: AnyObject?, inout rhs: C) -> C {
   return rhs <-- lhs
 }
 
-// TODO: Deserialization
+// TODO: Serialization

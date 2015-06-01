@@ -100,22 +100,22 @@ class JSONHelperTests: XCTestCase {
     XCTAssertEqual(number, 1, "Strings containing numbers should successfully deserialize into Ints.")
   }
 
-//  func testOptionalBool() {
-//    var property: Bool?
-//    property <-- dummyResponse["bool"]
-//    XCTAssertEqual(property!, true, "Bool? property should equal true")
-//    property <-- dummyResponse["invalidKey"]
-//    XCTAssertNil(property, "Bool? property should equal nil after invalid assignment")
-//  }
-//
-//  func testBool() {
-//    var property = true
-//    property <-- dummyResponse["invalidKey"]
-//    XCTAssertEqual(property, true, "Bool property should have the default value true")
-//    property <-- dummyResponse["bool"]
-//    XCTAssertEqual(property, true, "Bool property should equal true")
-//  }
-//
+  func testOptionalBool() {
+    var property: Bool?
+    property <-- dummyResponse["bool"]
+    XCTAssertEqual(property!, true, "Bool? property should equal true")
+    property <-- dummyResponse["invalidKey"]
+    XCTAssertNil(property, "Bool? property should equal nil after invalid assignment")
+  }
+
+  func testBool() {
+    var property = true
+    property <-- dummyResponse["invalidKey"]
+    XCTAssertEqual(property, true, "Bool property should have the default value true")
+    property <-- dummyResponse["bool"]
+    XCTAssertEqual(property, true, "Bool property should equal true")
+  }
+
 //  func testOptionalNSDate() {
 //    var property: NSDate?
 //    property <-- (dummyResponse["date"], DateFormatConverter("yyyy-MM-dd"))

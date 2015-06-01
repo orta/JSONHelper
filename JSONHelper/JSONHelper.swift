@@ -80,8 +80,8 @@ public func <-- <C: Convertible>(inout lhs: C?, rhs: AnyObject?) -> C? {
   return lhs
 }
 
-public func <-- <T: Convertible>(inout lhs: T, rhs: AnyObject?) -> T {
-  var newValue: T?
+public func <-- <C: Convertible>(inout lhs: C, rhs: AnyObject?) -> C {
+  var newValue: C?
   newValue <-- rhs
   if let newValue = newValue {
     lhs = newValue

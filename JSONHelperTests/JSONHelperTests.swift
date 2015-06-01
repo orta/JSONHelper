@@ -44,8 +44,8 @@ class JSONHelperTests: XCTestCase {
   struct Person: Deserializable {
     var name = ""
 
-    init(data: [String: AnyObject]) {
-      name <-- data["name"]
+    init(jsonDictionary: [String: AnyObject]) {
+      name <-- jsonDictionary["name"]
     }
 
     init() {}

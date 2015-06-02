@@ -80,9 +80,37 @@ public func <-- <C: Convertible>(inout lhs: C, rhs: Any?) -> C {
   return lhs
 }
 
+public func <-- <C: Convertible>(inout lhs: [C]?, rhs: AnyObject?) -> [C]? {
+  if let array = rhs as? [AnyObject] {
+    lhs = [C]()
+    for element in array {
+      var convertedElement: C?
+      convertedElement <-- element
+      if let convertedElement = convertedElement {
+        lhs?.append(convertedElement)
+      }
+    }
+  } else {
+    lhs = nil
+  }
+  return lhs
+}
+
+public func <-- <C: Convertible>(inout lhs: [C], rhs: AnyObject?) -> [C] {
+  var newValue: [C]?
+  newValue <-- rhs
+  if let newValue = newValue {
+    lhs = newValue
+  }
+  return lhs
+}
+
 public func <-- <D: Deserializable>(inout lhs: D?, rhs: Any?) -> D? {
-  if let jsonDictionary = convertToNilIfNull(rhs) as? JSONDictionary {
+  let cleanedValue = convertToNilIfNull(rhs)
+  if let jsonDictionary = cleanedValue as? JSONDictionary {
     lhs = D(jsonDictionary: jsonDictionary)
+  } else if let jsonString = cleanedValue as? String {
+    // TODO: JSON string deserialization
   } else {
     lhs = nil
   }
@@ -101,11 +129,19 @@ public func <-- <D: Deserializable>(inout lhs: D, rhs: Any?) -> D {
 /// Operator for use in left hand side to right hand side conversion and serialization.
 infix operator --> { associativity left precedence 150 }
 
-public func --> <C: Convertible>(lhs: AnyObject?, inout rhs: C?) -> C? {
+public func --> <C: Convertible>(lhs: Any?, inout rhs: C?) -> C? {
   return rhs <-- lhs
 }
 
-public func --> <C: Convertible>(lhs: AnyObject?, inout rhs: C) -> C {
+public func --> <C: Convertible>(lhs: Any?, inout rhs: C) -> C {
+  return rhs <-- lhs
+}
+
+public func --> <C: Convertible>(lhs: AnyObject?, inout rhs: [C]?) -> [C]? {
+  return rhs <-- lhs
+}
+
+public func --> <C: Convertible>(lhs: AnyObject?, inout rhs: [C]) -> [C] {
   return rhs <-- lhs
 }
 

@@ -155,24 +155,24 @@ class JSONHelperTests: XCTestCase {
     XCTAssertEqual(property.host!, "github.com", "NSURL should have the value github.com")
   }
 
-//  func testStringArray() {
-//    var property = [String]()
-//    property <-- dummyResponse["stringArray"]
-//    XCTAssertEqual(property.count, 3, "[String] property should have 3 members")
-//  }
-//
-//  func testIntArray() {
-//    var property = [Int]()
-//    property <-- dummyResponse["intArray"]
-//    XCTAssertEqual(property.count, 5, "[Int] property should have 5 members")
-//  }
-//
-//  func testBoolArray() {
-//    var property = [Bool]()
-//    property <-- dummyResponse["boolArray"]
-//    XCTAssertEqual(property.count, 2, "[Bool] property should have 2 members")
-//  }
-//
+  func testStringArray() {
+    var property = [String]()
+    property <-- dummyResponse["stringArray"]
+    XCTAssertEqual(property.count, 3, "[String] property should have 3 members")
+  }
+
+  func testIntArray() {
+    var property = [Int]()
+    property <-- dummyResponse["intArray"]
+    XCTAssertEqual(property.count, 5, "[Int] property should have 5 members")
+  }
+
+  func testBoolArray() {
+    var property = [Bool]()
+    property <-- dummyResponse["boolArray"]
+    XCTAssertEqual(property.count, 2, "[Bool] property should have 2 members")
+  }
+
 //  func testInstance() {
 //    var instance = Person()
 //    instance <-- dummyResponse["instance"]

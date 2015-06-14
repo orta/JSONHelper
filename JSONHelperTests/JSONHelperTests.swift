@@ -44,7 +44,7 @@ class JSONHelperTests: XCTestCase {
   struct Person: Deserializable {
     var name = ""
 
-    init(jsonDictionary: [String: AnyObject]) {
+    init(jsonDictionary: JSONDictionary) {
       name <-- jsonDictionary["name"]
     }
 
@@ -173,18 +173,40 @@ class JSONHelperTests: XCTestCase {
     XCTAssertEqual(property.count, 2, "[Bool] property should have 2 members")
   }
 
-//  func testInstance() {
-//    var instance = Person()
-//    instance <-- dummyResponse["instance"]
-//    XCTAssertEqual(instance.name, "b", "Person instance's name property should equal 'b'")
-//  }
-//
+  // TODO: Test [NSDate]
+
+  // TODO: Test [NSURL]
+
+  func testInstance() {
+    var instance = Person()
+    instance <-- dummyResponse["instance"]
+    XCTAssertEqual(instance.name, "b", "Person instance's name property should equal 'b'")
+  }
+
 //  func testInstanceArray() {
 //    var property = [Person]()
 //    property <-- dummyResponse["instanceArray"]
 //    XCTAssertEqual(property.count, 2, "[Person] property should have 2 members")
 //  }
-//
+
+  func testJSONStringToInstance() {
+    let name = "Bob"
+    var person: Person?
+    person <-- "{\"name\": \"\(name)\"}"
+    XCTAssert(person?.name == name, "Person instance's name property should equal '\(name)'")
+  }
+
+//  func testJSONStringArrayParsing() {
+//    let jsonString = "[{\"name\": \"I am \"},{\"name\": \"Groot!\"}]"
+//    var people = [Person]()
+//    people <-- jsonString
+//    var areYouGroot = ""
+//    for person in people {
+//      areYouGroot += person.name
+//    }
+//    XCTAssertEqual(areYouGroot, "I am Groot!", "Groot should be Groot")
+//  }
+
 //  func testInstanceMap() {
 //    var property = [String:Person]()
 //    property <-- dummyResponse["instanceMap"]
@@ -197,21 +219,6 @@ class JSONHelperTests: XCTestCase {
 //    XCTAssertEqual(property, EnumTest.One, "EnumTest should be equal to .One")
 //  }
 //
-//  func testJSONStringArrayParsing() {
-//    var jsonString = "[{\"name\": \"I am \"},{\"name\": \"Groot!\"}]"
-//    var jsonObject: JSONObject? = JSONStringToJSONObject(jsonString)
-//    var people = [Person]()
-//    var areYouGroot = ""
-//    
-//    people <-- jsonObject
-//    
-//    for person in people {
-//      areYouGroot += person.name
-//    }
-//    
-//    XCTAssertEqual(areYouGroot, "I am Groot!", "Groot should be Groot")
-//  }
-//  
 //  func testJSONStringMapParsing() {
 //    var jsonString = "{\"person one\": {\"name\": \"I am \"}, \"person two\": {\"name\": \"Groot!\"}}"
 //    var jsonObject: JSONObject? = JSONStringToJSONObject(jsonString)

@@ -105,19 +105,21 @@ public func <-- <C: Convertible>(inout lhs: [C], rhs: AnyObject?) -> [C] {
   return lhs
 }
 
-public func <-- <D: Deserializable>(inout lhs: D?, rhs: Any?) -> D? {
+public func <-- <D: Deserializable, T>(inout lhs: D?, rhs: T?) -> D? {
   let cleanedValue = convertToNilIfNull(rhs)
   if let jsonDictionary = cleanedValue as? JSONDictionary {
     lhs = D(jsonDictionary: jsonDictionary)
-  } else if let jsonString = cleanedValue as? String {
-    // TODO: JSON string deserialization
+  } else if let
+    jsonString = cleanedValue as? String,
+    jsonData = jsonString.dataUsingEncoding(NSUTF8StringEncoding) {
+      lhs <-- NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(0), error: nil)
   } else {
     lhs = nil
   }
   return lhs
 }
 
-public func <-- <D: Deserializable>(inout lhs: D, rhs: Any?) -> D {
+public func <-- <D: Deserializable, T>(inout lhs: D, rhs: T?) -> D {
   var newValue: D?
   newValue <-- rhs
   if let newValue = newValue {

@@ -66,12 +66,12 @@ public protocol Serializable {
 /// Operator for use in right hand side to left hand side conversion and deserialization.
 infix operator <-- { associativity right precedence 150 }
 
-public func <-- <C: Convertible>(inout lhs: C?, rhs: Any?) -> C? {
+public func <-- <C: Convertible, T>(inout lhs: C?, rhs: T?) -> C? {
   lhs = C.convertFromValue(convertToNilIfNull(rhs))
   return lhs
 }
 
-public func <-- <C: Convertible>(inout lhs: C, rhs: Any?) -> C {
+public func <-- <C: Convertible, T>(inout lhs: C, rhs: T?) -> C {
   var newValue: C?
   newValue <-- rhs
   if let newValue = newValue {
@@ -80,7 +80,7 @@ public func <-- <C: Convertible>(inout lhs: C, rhs: Any?) -> C {
   return lhs
 }
 
-public func <-- <C: Convertible>(inout lhs: [C]?, rhs: AnyObject?) -> [C]? {
+public func <-- <C: Convertible, T>(inout lhs: [C]?, rhs: T?) -> [C]? {
   if let array = rhs as? [AnyObject] {
     lhs = [C]()
     for element in array {
@@ -96,7 +96,7 @@ public func <-- <C: Convertible>(inout lhs: [C]?, rhs: AnyObject?) -> [C]? {
   return lhs
 }
 
-public func <-- <C: Convertible>(inout lhs: [C], rhs: AnyObject?) -> [C] {
+public func <-- <C: Convertible, T>(inout lhs: [C], rhs: T?) -> [C] {
   var newValue: [C]?
   newValue <-- rhs
   if let newValue = newValue {

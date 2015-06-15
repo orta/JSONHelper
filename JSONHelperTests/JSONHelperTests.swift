@@ -183,11 +183,11 @@ class JSONHelperTests: XCTestCase {
     XCTAssertEqual(instance.name, "b", "Person instance's name property should equal 'b'")
   }
 
-//  func testInstanceArray() {
-//    var property = [Person]()
-//    property <-- dummyResponse["instanceArray"]
-//    XCTAssertEqual(property.count, 2, "[Person] property should have 2 members")
-//  }
+  func testInstanceArray() {
+    var property = [Person]()
+    property <-- dummyResponse["instanceArray"]
+    XCTAssertEqual(property.count, 2, "[Person] property should have 2 members")
+  }
 
   func testJSONStringToInstance() {
     let name = "Bob"
@@ -196,16 +196,16 @@ class JSONHelperTests: XCTestCase {
     XCTAssert(person?.name == name, "Person instance's name property should equal '\(name)'")
   }
 
-//  func testJSONStringArrayParsing() {
-//    let jsonString = "[{\"name\": \"I am \"},{\"name\": \"Groot!\"}]"
-//    var people = [Person]()
-//    people <-- jsonString
-//    var areYouGroot = ""
-//    for person in people {
-//      areYouGroot += person.name
-//    }
-//    XCTAssertEqual(areYouGroot, "I am Groot!", "Groot should be Groot")
-//  }
+  func testJSONStringToInstanceArray() {
+    let jsonString = "[{\"name\": \"I am \"},{\"name\": \"Groot!\"}]"
+    var people = [Person]()
+    people <-- jsonString
+    var areYouGroot = ""
+    for person in people {
+      areYouGroot += person.name
+    }
+    XCTAssertEqual(areYouGroot, "I am Groot!", "Groot should be Groot")
+  }
 
 //  func testInstanceMap() {
 //    var property = [String:Person]()

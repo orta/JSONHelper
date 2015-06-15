@@ -128,6 +128,35 @@ public func <-- <D: Deserializable, T>(inout lhs: D, rhs: T?) -> D {
   return lhs
 }
 
+public func <-- <D: Deserializable, T>(inout lhs: [D]?, rhs: T?) -> [D]? {
+  if let array = rhs as? [AnyObject] {
+    lhs = [D]()
+    for element in array {
+      var convertedElement: D?
+      convertedElement <-- element
+      if let convertedElement = convertedElement {
+        lhs?.append(convertedElement)
+      }
+    }
+  } else if let
+    jsonString = convertToNilIfNull(rhs) as? String,
+    jsonData = jsonString.dataUsingEncoding(NSUTF8StringEncoding) {
+      lhs <-- NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(0), error: nil)
+  } else {
+    lhs = nil
+  }
+  return lhs
+}
+
+public func <-- <D: Deserializable, T>(inout lhs: [D], rhs: T?) -> [D] {
+  var newValue: [D]?
+  newValue <-- rhs
+  if let newValue = newValue {
+    lhs = newValue
+  }
+  return lhs
+}
+
 /// Operator for use in left hand side to right hand side conversion and serialization.
 infix operator --> { associativity left precedence 150 }
 

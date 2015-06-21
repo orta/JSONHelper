@@ -338,6 +338,7 @@
 		5FAD075B1A70F2FC00C4D09E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Baris Sencan";
 				TargetAttributes = {

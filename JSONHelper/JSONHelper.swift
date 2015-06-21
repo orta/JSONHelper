@@ -43,9 +43,9 @@ public protocol Convertible {
 
 /// Returns nil if given object is of type NSNull.
 ///
-/// :param: object Object to convert.
+/// - parameter object: Object to convert.
 ///
-/// :returns: nil if object is of type NSNull, else returns the object itself.
+/// - returns: nil if object is of type NSNull, else returns the object itself.
 public func convertToNilIfNull(value: Any?) -> Any? {
   if value is NSNull {
     return nil
@@ -112,7 +112,8 @@ public func <-- <D: Deserializable, T>(inout lhs: D?, rhs: T?) -> D? {
   } else if let
     jsonString = cleanedValue as? String,
     jsonData = jsonString.dataUsingEncoding(NSUTF8StringEncoding) {
-      lhs <-- NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(0), error: nil)
+        let data = try! NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(rawValue: 0))
+        lhs <-- data
   } else {
     lhs = nil
   }
@@ -141,7 +142,8 @@ public func <-- <D: Deserializable, T>(inout lhs: [D]?, rhs: T?) -> [D]? {
   } else if let
     jsonString = convertToNilIfNull(rhs) as? String,
     jsonData = jsonString.dataUsingEncoding(NSUTF8StringEncoding) {
-      lhs <-- NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(0), error: nil)
+        let data = try! NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(rawValue: 0))
+        lhs <-- data
   } else {
     lhs = nil
   }

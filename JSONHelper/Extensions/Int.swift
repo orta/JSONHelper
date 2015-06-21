@@ -37,7 +37,7 @@ extension Int: Convertible {
       if let intValue = value as? Int {
         return intValue
       } else if let stringValue = value as? String {
-        return stringValue.toInt()
+        return Int(stringValue)
       }
     }
     return nil
